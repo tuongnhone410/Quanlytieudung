@@ -24,10 +24,13 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
 
-    - name: Generate debug.keystore
+    - name: Generate debug.keystore and upload key
       run: |
         if [ ! -f debug.keystore ]; then
           keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+        fi
+        if [ ! -f my-upload-key.jks ]; then
+          keytool -genkey -v -keystore my-upload-key.jks -storepass android -alias upload -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Release,O=Android,C=US"
         fi
 
     - name: Generate dummy google-services.json if missing
