@@ -25,29 +25,20 @@ jobs:
         run: |
           if [ -f ".env.example" ] && [ ! -f ".env" ]; then
             cp .env.example .env
-            echo "Created .env from .env.example"
           fi
-
-      # 1. Cài đặt màn hình ảo Xvfb cho Linux Runner
-      - name: Install Xvfb (Virtual Display for KSP)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y xvfb
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
-      - name: Ensure Gradle Wrapper (Version 9.3.1)
+      - name: Ensure Gradle Wrapper (Version 8.10.2)
         run: |
           if [ ! -f "./gradlew" ]; then
-            gradle wrapper --gradle-version 9.3.1
+            gradle wrapper --gradle-version 8.10.2
           fi
           chmod +x gradlew
 
-      # 2. Bọc lệnh build bằng xvfb-run để KSP không bị đứt luồng AWT
       - name: Build Debug APK
-        run: |
-          xvfb-run --auto-servernum ./gradlew assembleDebug --stacktrace
+        run: ./gradlew assembleDebug --stacktrace
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
