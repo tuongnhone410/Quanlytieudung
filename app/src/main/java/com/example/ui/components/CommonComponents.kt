@@ -86,7 +86,9 @@ fun ExpenseCardItem(
 
             // Note / Category Name and Date
             Column(
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = 8.dp)
             ) {
                 Text(
                     text = if (item.expense.note.isNotBlank()) item.expense.note else (item.category?.name ?: "Chi tiêu"),
@@ -99,27 +101,35 @@ fun ExpenseCardItem(
                 )
                 Spacer(modifier = Modifier.height(3.dp))
                 Row(
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     if (item.expense.note.isNotBlank() && item.category != null) {
                         Text(
                             text = item.category.name,
                             style = MaterialTheme.typography.bodySmall.copy(color = AppTheme.colors.textSecondary),
-                            maxLines = 1
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier.weight(1f, fill = false)
                         )
                         Text(
                             text = " • ",
-                            style = MaterialTheme.typography.bodySmall.copy(color = AppTheme.colors.textTertiary)
+                            style = MaterialTheme.typography.bodySmall.copy(color = AppTheme.colors.textTertiary),
+                            maxLines = 1,
+                            softWrap = false
                         )
                     }
                     Text(
                         text = DateUtils.formatRelativeDate(item.expense.date),
-                        style = MaterialTheme.typography.bodySmall.copy(color = AppTheme.colors.textTertiary)
+                        style = MaterialTheme.typography.bodySmall.copy(color = AppTheme.colors.textTertiary),
+                        maxLines = 1,
+                        softWrap = false,
+                        overflow = TextOverflow.Visible
                     )
                 }
             }
 
-            Spacer(modifier = Modifier.width(10.dp))
+            Spacer(modifier = Modifier.width(8.dp))
 
             // Formatted Amount
             Box(
@@ -133,7 +143,9 @@ fun ExpenseCardItem(
                     style = MaterialTheme.typography.titleMedium.copy(
                         fontWeight = FontWeight.Bold,
                         color = CoralExpense
-                    )
+                    ),
+                    maxLines = 1,
+                    softWrap = false
                 )
             }
         }
