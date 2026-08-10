@@ -27,18 +27,15 @@ jobs:
             cp .env.example .env
           fi
 
-      - name: Setup Gradle
+      # Cài đặt trực tiếp Gradle 8.10.2 vào môi trường
+      - name: Setup Gradle 8.10.2
         uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.10.2'
 
-      - name: Ensure Gradle Wrapper (Version 8.10.2)
-        run: |
-          if [ ! -f "./gradlew" ]; then
-            gradle wrapper --gradle-version 8.10.2
-          fi
-          chmod +x gradlew
-
+      # Build APK trực tiếp bằng Gradle 8.10.2 vừa cài
       - name: Build Debug APK
-        run: ./gradlew assembleDebug --stacktrace
+        run: gradle assembleDebug --stacktrace
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
