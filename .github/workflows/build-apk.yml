@@ -39,7 +39,7 @@ jobs:
           chmod +x gradlew
 
       - name: Build Debug APK
-        run: ./gradlew assembleDebug --stacktrace
+        run: ./gradlew assembleDebug -Dksp.incremental=false -Dkotlin.compiler.execution.strategy="in-process" --stacktrace
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
