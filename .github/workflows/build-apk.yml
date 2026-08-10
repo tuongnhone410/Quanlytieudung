@@ -7,11 +7,6 @@ on:
     branches: [ "main", "master" ]
   workflow_dispatch:
 
-# Khai báo ép JVM chạy chế độ không giao diện (headless) ở cấp độ toàn cục
-env:
-  GRADLE_OPTS: "-Djava.awt.headless=true -Xmx4096m"
-  JAVA_TOOL_OPTIONS: "-Djava.awt.headless=true"
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -43,8 +38,16 @@ jobs:
           fi
           chmod +x gradlew
 
+      # Bước quan trọng: Ép Kotlin Compiler Daemon & KSP chạy in-process và Headless
+      - name: Configure gradle.properties for KSP
+        run: |
+          echo "org.gradle.jvmargs=-Xmx4096m -Djava.awt.headless=true" >> gradle.properties
+          echo "kotlin.daemon.jvm.options=-Djava.awt.headless=true" >> gradle.properties
+          echo "kotlin.compiler.execution.strategy=in-process" >> gradle.properties
+          echo "ksp.incremental=false" >> gradle.properties
+
       - name: Build Debug APK
-        run: ./gradlew assembleDebug --no-daemon -Dksp.incremental=false --stacktrace
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
