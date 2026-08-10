@@ -7,6 +7,11 @@ on:
     branches: [ "main", "master" ]
   workflow_dispatch:
 
+# Khai báo ép JVM chạy chế độ không giao diện (headless) ở cấp độ toàn cục
+env:
+  GRADLE_OPTS: "-Djava.awt.headless=true -Xmx4096m"
+  JAVA_TOOL_OPTIONS: "-Djava.awt.headless=true"
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -39,7 +44,7 @@ jobs:
           chmod +x gradlew
 
       - name: Build Debug APK
-        run: ./gradlew assembleDebug -Dksp.incremental=false -Dkotlin.compiler.execution.strategy="in-process" --stacktrace
+        run: ./gradlew assembleDebug --no-daemon -Dksp.incremental=false --stacktrace
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
