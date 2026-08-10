@@ -1,0 +1,37 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Wallet base card -->
+    <path
+        android:pathData="M30,38C30,34.69 32.69,32 36,32H72C75.31,32 78,34.69 78,38V70C78,73.31 75.31,76 72,76H36C32.69,76 30,73.31 30,70Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="30"
+                android:startY="32"
+                android:endX="78"
+                android:endY="76"
+                android:type="linear">
+                <item android:offset="0.0" android:color="#10B981" />
+                <item android:offset="1.0" android:color="#059669" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <!-- Top folded card inside wallet -->
+    <path
+        android:pathData="M37,28C37,26.34 38.34,25 40,25H68C69.66,25 71,26.34 71,28V32H37Z"
+        android:fillColor="#34D399" />
+    <!-- Wallet flap/band -->
+    <path
+        android:pathData="M52,47H78V61H52C48.69,61 46,58.31 46,54C46,49.69 48.69,47 52,47Z"
+        android:fillColor="#047857" />
+    <!-- Golden clasp coin / badge -->
+    <path
+        android:pathData="M54,54m-4.5,0a4.5,4.5 0 1,0 9,0a4.5,4.5 0 1,0 -9,0"
+        android:fillColor="#FBBF24" />
+    <path
+        android:pathData="M54,54m-2.2,0a2.2,2.2 0 1,0 4.4,0a2.2,2.2 0 1,0 -4.4,0"
+        android:fillColor="#F59E0B" />
+</vector>

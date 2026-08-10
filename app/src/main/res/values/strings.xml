@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Quản lý chi tiêu</string>
+    <string name="nav_overview">Tổng quan</string>
+    <string name="nav_history">Lịch sử</string>
+    <string name="nav_stats">Thống kê</string>
+    <string name="nav_settings">Cài đặt</string>
+    <string name="title_add_expense">Thêm chi tiêu</string>
+    <string name="btn_save">Lưu</string>
+</resources>
